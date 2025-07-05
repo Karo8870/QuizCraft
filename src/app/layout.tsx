@@ -6,7 +6,8 @@ import '@/lib/fontawesome/css/fa.css';
 import { cn } from '@nextui-org/theme';
 
 const inter = Poppins({
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin']
 });
 
 export const metadata: Metadata = {

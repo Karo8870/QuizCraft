@@ -30,6 +30,16 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
   const onSubmit = async (data: any) => {
     setDisplayResult(true);
 
+    console.log(
+      groups
+        .map((group) => group.questions)
+        .flat()
+        .map((question, index) => ({
+          question: question.question,
+          answer: data[index]
+        }))
+    );
+
     const response = await api.post(
       `/quiz-craft/feedback/${id}`,
       groups
@@ -41,6 +51,8 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
         }))
     );
 
+    console.log(response);
+
     setFeedback(response.data.feedback);
   };
 
@@ -50,7 +62,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
 
       console.log(response);
 
-      setGroups(response.data[0].body.groups);
+      setGroups(response.data.body.groups);
     }
 
     void getResponse();

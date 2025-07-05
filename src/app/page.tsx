@@ -86,7 +86,7 @@ export default function Home() {
 
       setQuizzes(
         response.data.map((quiz: any) => ({
-          files: JSON.parse(quiz.files).map(
+          files: quiz.files.map(
             (file: any) => file.path.match(/[^-]*-[^-]*-(.*)/)[1]
           ),
           timestamp: new Date(quiz.timestamp),
