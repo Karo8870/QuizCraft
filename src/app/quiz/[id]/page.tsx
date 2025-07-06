@@ -40,18 +40,17 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
         }))
     );
 
-    const response = await api.post(
-      `/quiz-craft/feedback/${id}`,
-      groups
-        .map((group) => group.questions)
-        .flat()
-        .map((question, index) => ({
-          question: question.question,
-          answer: data[index]
-        }))
-    );
-
-    console.log(response);
+    const response = await api.post(`/quiz-craft/feedback/${id}`, {
+      responses: JSON.stringify(
+        groups
+          .map((group) => group.questions)
+          .flat()
+          .map((question, index) => ({
+            question: question.question,
+            answer: data[index]
+          }))
+      )
+    });
 
     setFeedback(response.data.feedback);
   };
